@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Controller, useFormContext } from 'react-hook-form';
-import { Input } from '@/shared/ui/input/Input';
+import { Controller, useFormContext } from "react-hook-form";
+import { Input } from "@/shared/ui/input/Input";
 
 type FormInputProps = {
   name: string;

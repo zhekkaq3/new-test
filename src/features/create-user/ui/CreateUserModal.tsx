@@ -1,20 +1,20 @@
-import { Modal } from '@/shared/ui/modal/Modal';
-import { Button } from '@/shared/ui/button/Button';
-import { CreateUserForm } from './CreateUserForm';
+import { Modal } from "@/shared/ui/modal/Modal";
+import { Button } from "@/shared/ui/button/Button";
+import { CreateUserFormForModal } from "./CreateUserFormForModal";
 
 export const CreateUserModal = () => {
   return (
     <>
       <Modal
         trigger={
-          <Button className="text-accent-foreground bg-transparent hover:bg-accent hover:text-accent-foreground">
-            Создать пользователя
+          <Button size="lg" className="w-[350px] cursor-pointer">
+            Создать пользователя Modal
           </Button>
         }
         title="Создание пользователя"
         description="Заполните форму, чтобы создать нового пользователя."
       >
-        <CreateUserForm />
+        <CreateUserFormForModal />
       </Modal>
     </>
   );

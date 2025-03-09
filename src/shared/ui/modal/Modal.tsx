@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Dialog,
@@ -7,39 +7,64 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/shared/ui/dialog/Dialog';
-import { ReactNode, useState } from 'react';
+  DialogClose,
+} from "@/shared/ui/dialog/Dialog";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 type ModalProps = {
   trigger: ReactNode;
+  closeButton?: ReactNode;
   title?: string;
   description?: string;
-  children: ReactNode;
+  children?: ReactNode;
+};
+
+type ModalContextType = {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const ModalContext = createContext<ModalContextType | null>(null);
+
+export const useModal = () => {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error("useModal must be used within a ModalProvider");
+  }
+  return context;
 };
 
 export const Modal = ({
   trigger,
+  closeButton,
   title,
   description,
   children,
 }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-
   return (
-    <Dialog open={isOpen} onOpenChange={(op) => (op ? open() : close())}>
-      <DialogTrigger asChild onClick={open}>
-        {trigger}
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          {title && <DialogTitle>{title}</DialogTitle>}
-          {description && <DialogDescription>{description}</DialogDescription>}
-        </DialogHeader>
-        {children}
-      </DialogContent>
-    </Dialog>
+    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            {title && <DialogTitle>{title}</DialogTitle>}
+            {description && (
+              <DialogDescription>{description}</DialogDescription>
+            )}
+          </DialogHeader>
+          {children}
+          <DialogClose>{closeButton}</DialogClose>
+        </DialogContent>
+      </Dialog>
+    </ModalContext.Provider>
   );
 };

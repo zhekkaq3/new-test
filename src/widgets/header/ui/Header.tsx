@@ -1,11 +1,11 @@
-import { Button } from '@/shared/ui/button/Button';
+import { Button } from "@/shared/ui/button/Button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/shared/ui/hover-card/hover-card';
-import { ModeToggle } from '@/shared/ui/theme-provider/togle';
-import { CalendarIcon } from 'lucide-react';
+} from "@/shared/ui/hover-card/hover-card";
+import { ModeToggle } from "@/shared/ui/theme-provider/togle";
+import { CalendarIcon } from "lucide-react";
 
 export default function Header() {
   return (
@@ -24,7 +24,7 @@ export default function Header() {
                 Components.
               </p>
               <div className="flex items-center pt-2">
-                <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{' '}
+                <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
                 <span className="text-xs text-muted-foreground">МАРТ 2025</span>
               </div>
             </div>
