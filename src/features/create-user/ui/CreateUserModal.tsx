@@ -14,14 +14,16 @@ export const CreateUserModal = () => {
         }
         title="Создание пользователя"
         description="Заполните форму, чтобы создать нового пользователя."
+        closeButton={
+          <Button type="button" className="text-accent-foreground bg-transparent hover:bg-accent hover:text-accent-foreground absolute top-4 right-4 rounded-xs transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </Button>
+        }
       >
         {({ onClose }) => (
           <>
             <CreateUserForm onClose={onClose} />
-            <Button type="button" onClick={() => onClose()} className="text-accent-foreground bg-transparent hover:bg-accent hover:text-accent-foreground absolute top-4 right-4 rounded-xs transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-              <XIcon />
-              <span className="sr-only">Close</span>
-            </Button>
           </>
         )}
       </Modal>
