@@ -6,27 +6,25 @@ import { FormInput } from "@/shared/ui/form/FormField";
 import { CreateUserFormData, createUserSchema } from "../model/schema";
 import { useCreateUser } from "../lib/useCreateUser";
 
-export const CreateUserForm = () => {
+type CreateUserFormProps = {
+  onClose?: () => void;
+  className?: string;
+}
+
+export const CreateUserForm = ({onClose, className} : CreateUserFormProps) => {
   const { handleFormSubmit, isSubmitting } = useCreateUser();
 
   const onSubmit = async (data: CreateUserFormData) => {
     await handleFormSubmit(data);
+    onClose?.()
   };
 
   return (
     <Form
       onSubmit={onSubmit}
       schema={createUserSchema}
-      className="flex flex-col rounded-xl border bg-card text-card-foreground shadow w-[350px] gap-3 p-6"
+      className={`flex flex-col gap-6 ${className}`}
     >
-      <div className="flex flex-col space-y-1.5">
-        <div className="font-semibold leading-none tracking-tight">
-          Создание пользователя
-        </div>
-        <div className="text-sm text-muted-foreground">
-          Заполните форму, чтобы создать нового пользователя.
-        </div>
-      </div>
       <FormInput
         name="name"
         label="Имя"

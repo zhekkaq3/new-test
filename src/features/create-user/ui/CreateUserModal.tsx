@@ -1,6 +1,7 @@
 import { Modal } from "@/shared/ui/modal/Modal";
 import { Button } from "@/shared/ui/button/Button";
-import { CreateUserFormForModal } from "./CreateUserFormForModal";
+import { CreateUserForm } from "./CreateUserForm";
+import { XIcon } from "lucide-react";
 
 export const CreateUserModal = () => {
   return (
@@ -14,7 +15,15 @@ export const CreateUserModal = () => {
         title="Создание пользователя"
         description="Заполните форму, чтобы создать нового пользователя."
       >
-        <CreateUserFormForModal />
+        {({ onClose }) => (
+          <>
+            <CreateUserForm onClose={onClose} />
+            <Button type="button" onClick={() => onClose()} className="text-accent-foreground bg-transparent hover:bg-accent hover:text-accent-foreground absolute top-4 right-4 rounded-xs transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+              <XIcon />
+              <span className="sr-only">Close</span>
+            </Button>
+          </>
+        )}
       </Modal>
     </>
   );
